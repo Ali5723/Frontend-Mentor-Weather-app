@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <title>Frontend Mentor | Weather app</title>
+  <link rel="stylesheet" href="src/styles/normalize.css">
+  <link rel="stylesheet" href="src/styles/style.css">
+</head>
+<body>
+  <div class="header">
+    <img src="/images/logo.svg" alt="logo">
+    <div class="settings dropdown">
+      <p class="dropdown-title">
+      <img src="/images/icon-units.svg" alt="gear">
+      Units
+      <img src="/images/icon-dropdown.svg" alt="angle-down">
+      </p>
+      <div class="dropdown-body settingsAnimation">
+        <div class="dropdown-item">
+          Switch to Imperial
+          <!-- Switch to Metric -->
+        </div>
+        <div class="dropdown-group">
+          <p class="dropdown-group-title">Temperature</p>
+          <div class="dropdown-item">Fahrenheit (°F)</div>
+          <div class="dropdown-item selected-item">Celsius (°C)</div>
+        </div>
+        <div class="dropdown-group">
+          <p class="dropdown-group-title">Wind Speed</p>
+          <div class="dropdown-item selected-item">km/h</div>
+          <div class="dropdown-item">mph</div>
+        </div>
+        <div class="dropdown-group">
+          <p class="dropdown-group-title">Precipitation</p>
+          <div class="dropdown-item selected-item">Millimeters (mm)</div>
+          <div class="dropdown-item">Inches (in)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  How's the sky looking today?
+
+  Search for a city, e.g., New York
+  Search
+
+  Feels like
+  <!-- Insert temperature here -->
+
+  Humidity
+  <!-- Insert humidity here -->
+
+  Wind
+  <!-- Insert wind here -->   
+  
+  Precipitation
+  <!-- Insert precipitation here -->
+
+  Daily forecast
+  <!-- Insert daily forecast for the next 7 days here -->
+
+  Hourly forecast
+  <!-- Insert hourly forecast for the selected day here -->
+
+  <script type="module" src="src/main.js" defer></script>
+</body>
+</html>
