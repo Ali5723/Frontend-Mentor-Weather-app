@@ -1,73 +1,249 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  <title>Frontend Mentor | Weather app</title>
-  <link rel="stylesheet" href="src/styles/normalize.css">
-  <link rel="stylesheet" href="src/styles/style.css">
-</head>
-<body>
-  <div class="header">
-    <img src="/images/logo.svg" alt="logo">
-    <div class="settings dropdown">
-      <p class="dropdown-title">
-      <img src="/images/icon-units.svg" alt="gear">
-      Units
-      <img src="/images/icon-dropdown.svg" alt="angle-down">
-      </p>
-      <div class="dropdown-body settingsAnimation">
-        <div class="dropdown-item">
-          Switch to Imperial
-          <!-- Switch to Metric -->
-        </div>
-        <div class="dropdown-group">
-          <p class="dropdown-group-title">Temperature</p>
-          <div class="dropdown-item">Fahrenheit (°F)</div>
-          <div class="dropdown-item selected-item">Celsius (°C)</div>
-        </div>
-        <div class="dropdown-group">
-          <p class="dropdown-group-title">Wind Speed</p>
-          <div class="dropdown-item selected-item">km/h</div>
-          <div class="dropdown-item">mph</div>
-        </div>
-        <div class="dropdown-group">
-          <p class="dropdown-group-title">Precipitation</p>
-          <div class="dropdown-item selected-item">Millimeters (mm)</div>
-          <div class="dropdown-item">Inches (in)</div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/images/favicon-32x32.png"
+    />
+    <title>Frontend Mentor | Weather app</title>
+    <link rel="stylesheet" href="src/styles/normalize.css" />
+    <link rel="stylesheet" href="src/styles/style.css" />
+  </head>
+  <body>
+    <div class="header">
+      <img src="/images/logo.svg" alt="logo" />
+      <div class="settings dropdown">
+        <button class="dropdown-title">
+          <img src="/images/icon-units.svg" alt="gear" />
+          Units
+          <img src="/images/icon-dropdown.svg" alt="angle-down" />
+        </button>
+        <div class="dropdown-body dropdownAnimation">
+          <div class="dropdown-item">
+            Switch to Imperial
+            <!-- Switch to Metric -->
+          </div>
+          <div class="dropdown-group">
+            <p class="dropdown-group-title">Temperature</p>
+            <div class="dropdown-item selected-item">Celsius (°C)</div>
+            <div class="dropdown-item">Fahrenheit (°F)</div>
+          </div>
+          <div class="dropdown-group">
+            <p class="dropdown-group-title">Wind Speed</p>
+            <div class="dropdown-item selected-item">km/h</div>
+            <div class="dropdown-item">mph</div>
+          </div>
+          <div class="dropdown-group">
+            <p class="dropdown-group-title">Precipitation</p>
+            <div class="dropdown-item selected-item">Millimeters (mm)</div>
+            <div class="dropdown-item">Inches (in)</div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
+    <h1 class="page-title">How's the sky looking today?</h1>
 
+    <form method="post" class="search">
+      <div class="dropdown">
+        <div class="dropdown-title">
+          <img
+            src="/images/icon-search.svg"
+            alt="search-icon"
+            id="searchIcon"
+          />
+          <input type="text" placeholder="Search for a place..." />
+        </div>
+        <div class="dropdown-body dropdownAnimation">
+          <div class="dropdown-item selected-item">City Name</div>
+          <div class="dropdown-item">City Name</div>
+          <div class="dropdown-item">City Name</div>
+          <div class="dropdown-item">City Name</div>
+        </div>
+      </div>
+      <button id="searchButton">Search</button>
+    </form>
 
+    <div class="weather">
+      <h2 class="city">Berlin, Germany</h2>
+      <p class="date">Tuesday, Aug 5, 2025</p>
+      <div>
+        <img src="/images/icon-sunny.webp" alt="sunny-icon" />
+        <h3 class="degree">68&deg;</h3>
+      </div>
+    </div>
+    <div class="status">
+      <div class="status-item">
+        <h2>Feels like</h2>
+        <h3>64&deg;</h3>
+        <!-- Insert temperature here -->
+      </div>
+      <div class="status-item">
+        <h2>Humidity</h2>
+        <h3>46%</h3>
+        <!-- Insert humidity here -->
+      </div>
+      <div class="status-item">
+        <h2>Wind</h2>
+        <h3>9 mph</h3>
+        <!-- Insert wind here -->
+      </div>
+      <div class="status-item">
+        <h2>Precipitation</h2>
+        <h3>0 in</h3>
+        <!-- Insert precipitation here -->
+      </div>
+    </div>
 
+    <!-- Insert daily forecast for the next 7 days here -->
+    <div class="daily">
+      <h2>Daily forecast</h2>
+      <div class="daily-items">
+        <div class="daily-item">
+          <h3 class="title">Tue</h3>
+          <img src="/images/icon-sunny.webp" alt="sunny-icon" />
+          <div class="degrees">
+            <h3 class="high">77&deg;</h3>
+            <h3 class="low">70&deg;</h3>
+          </div>
+        </div>
+        <div class="daily-item">
+          <h3 class="title">Wed</h3>
+          <img src="/images/icon-sunny.webp" alt="sunny-icon" />
+          <div class="degrees">
+            <h3 class="high">77&deg;</h3>
+            <h3 class="low">70&deg;</h3>
+          </div>
+        </div>
+        <div class="daily-item">
+          <h3 class="title">Thu</h3>
+          <img src="/images/icon-sunny.webp" alt="sunny-icon" />
+          <div class="degrees">
+            <h3 class="high">77&deg;</h3>
+            <h3 class="low">70&deg;</h3>
+          </div>
+        </div>
+        <div class="daily-item">
+          <h3 class="title">Fri</h3>
+          <img src="/images/icon-sunny.webp" alt="sunny-icon" />
+          <div class="degrees">
+            <h3 class="high">77&deg;</h3>
+            <h3 class="low">70&deg;</h3>
+          </div>
+        </div>
+        <div class="daily-item">
+          <h3 class="title">Thu</h3>
+          <img src="/images/icon-sunny.webp" alt="sunny-icon" />
+          <div class="degrees">
+            <h3 class="high">77&deg;</h3>
+            <h3 class="low">70&deg;</h3>
+          </div>
+        </div>
+        <div class="daily-item">
+          <h3 class="title">Fri</h3>
+          <img src="/images/icon-sunny.webp" alt="sunny-icon" />
+          <div class="degrees">
+            <h3 class="high">77&deg;</h3>
+            <h3 class="low">70&deg;</h3>
+          </div>
+        </div>
+        <div class="daily-item">
+          <h3 class="title">Thu</h3>
+          <img src="/images/icon-sunny.webp" alt="sunny-icon" />
+          <div class="degrees">
+            <h3 class="high">77&deg;</h3>
+            <h3 class="low">70&deg;</h3>
+          </div>
+        </div>
+        <div class="daily-item">
+          <h3 class="title">Fri</h3>
+          <img src="/images/icon-sunny.webp" alt="sunny-icon" />
+          <div class="degrees">
+            <h3 class="high">77&deg;</h3>
+            <h3 class="low">70&deg;</h3>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  How's the sky looking today?
+    <!-- Insert hourly forecast for the selected day here -->
+    <div class="hourly">
+      <div class="header-part">
+        <div class="title">Hourly forecast</div>
+        <div class="dropdown">
+          <button class="dropdown-title">
+            Tuesday
+            <img src="/images/icon-dropdown.svg" alt="angle-down" />
+          </button>
+          <div class="dropdown-body dropdownAnimation">
+            <div class="dropdown-item selected-item">Monday</div>
+            <div class="dropdown-item">Tuesday</div>
+            <div class="dropdown-item">Wednesday</div>
+            <div class="dropdown-item">Thursday</div>
+            <div class="dropdown-item">Friday</div>
+            <div class="dropdown-item">Saturday</div>
+            <div class="dropdown-item">Sunday</div>
+          </div>
+        </div>
+      </div>
+      <div class="main-part">
+        <div class="item">
+          <div class="container">
+            <img src="/images/icon-sunny.webp" alt="sunny-icon" />
+            <div class="time">4 PM</div>
+          </div>
+          <div class="degree">77&deg;</div>
+        </div>
+        <div class="item">
+          <div class="container">
+            <img src="/images/icon-sunny.webp" alt="sunny-icon" />
+            <div class="time">4 PM</div>
+          </div>
+          <div class="degree">77&deg;</div>
+        </div><div class="item">
+          <div class="container">
+            <img src="/images/icon-sunny.webp" alt="sunny-icon" />
+            <div class="time">4 PM</div>
+          </div>
+          <div class="degree">77&deg;</div>
+        </div><div class="item">
+          <div class="container">
+            <img src="/images/icon-sunny.webp" alt="sunny-icon" />
+            <div class="time">4 PM</div>
+          </div>
+          <div class="degree">77&deg;</div>
+        </div><div class="item">
+          <div class="container">
+            <img src="/images/icon-sunny.webp" alt="sunny-icon" />
+            <div class="time">4 PM</div>
+          </div>
+          <div class="degree">77&deg;</div>
+        </div><div class="item">
+          <div class="container">
+            <img src="/images/icon-sunny.webp" alt="sunny-icon" />
+            <div class="time">4 PM</div>
+          </div>
+          <div class="degree">77&deg;</div>
+        </div><div class="item">
+          <div class="container">
+            <img src="/images/icon-sunny.webp" alt="sunny-icon" />
+            <div class="time">4 PM</div>
+          </div>
+          <div class="degree">77&deg;</div>
+        </div><div class="item">
+          <div class="container">
+            <img src="/images/icon-sunny.webp" alt="sunny-icon" />
+            <div class="time">4 PM</div>
+          </div>
+          <div class="degree">77&deg;</div>
+        </div>
+      </div>
+    </div>
 
-  Search for a city, e.g., New York
-  Search
-
-  Feels like
-  <!-- Insert temperature here -->
-
-  Humidity
-  <!-- Insert humidity here -->
-
-  Wind
-  <!-- Insert wind here -->   
-  
-  Precipitation
-  <!-- Insert precipitation here -->
-
-  Daily forecast
-  <!-- Insert daily forecast for the next 7 days here -->
-
-  Hourly forecast
-  <!-- Insert hourly forecast for the selected day here -->
-
-  <script type="module" src="src/main.js" defer></script>
-</body>
+    <script type="module" src="src/main.js" defer></script>
+  </body>
 </html>
