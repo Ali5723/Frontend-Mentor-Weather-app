@@ -58,7 +58,7 @@
           />
           <input type="text" placeholder="Search for a place..." />
         </div>
-        <div class="dropdown-body dropdownAnimation">
+        <div class="dropdown-body dropdownAnimation scroll">
           <div class="dropdown-item selected-item">City Name</div>
           <div class="dropdown-item">City Name</div>
           <div class="dropdown-item">City Name</div>
@@ -69,8 +69,10 @@
     </form>
 
     <div class="weather">
-      <h2 class="city">Berlin, Germany</h2>
-      <p class="date">Tuesday, Aug 5, 2025</p>
+      <div>
+        <h2 class="city">Berlin, Germany</h2>
+        <p class="date">Tuesday, Aug 5, 2025</p>
+      </div>
       <div>
         <img src="/images/icon-sunny.webp" alt="sunny-icon" />
         <h3 class="degree">68&deg;</h3>
@@ -79,22 +81,22 @@
     <div class="status">
       <div class="status-item">
         <h2>Feels like</h2>
-        <h3>64&deg;</h3>
+        <h3 id="temperature">64&deg;</h3>
         <!-- Insert temperature here -->
       </div>
       <div class="status-item">
         <h2>Humidity</h2>
-        <h3>46%</h3>
+        <h3 id="humidity">46%</h3>
         <!-- Insert humidity here -->
       </div>
       <div class="status-item">
         <h2>Wind</h2>
-        <h3>9 mph</h3>
+        <h3 id="wind">9 mph</h3>
         <!-- Insert wind here -->
       </div>
       <div class="status-item">
         <h2>Precipitation</h2>
-        <h3>0 in</h3>
+        <h3 id="precipitation">0 in</h3>
         <!-- Insert precipitation here -->
       </div>
     </div>
@@ -176,7 +178,7 @@
         <div class="title">Hourly forecast</div>
         <div class="dropdown">
           <button class="dropdown-title">
-            Tuesday
+            <span id="hourly">Monday</span>
             <img src="/images/icon-dropdown.svg" alt="angle-down" />
           </button>
           <div class="dropdown-body dropdownAnimation">
@@ -190,7 +192,7 @@
           </div>
         </div>
       </div>
-      <div class="main-part">
+      <div class="main-part scroll">
         <div class="item">
           <div class="container">
             <img src="/images/icon-sunny.webp" alt="sunny-icon" />
@@ -204,37 +206,113 @@
             <div class="time">4 PM</div>
           </div>
           <div class="degree">77&deg;</div>
-        </div><div class="item">
+        </div>
+        <div class="item">
           <div class="container">
             <img src="/images/icon-sunny.webp" alt="sunny-icon" />
             <div class="time">4 PM</div>
           </div>
           <div class="degree">77&deg;</div>
-        </div><div class="item">
+        </div>
+        <div class="item">
           <div class="container">
             <img src="/images/icon-sunny.webp" alt="sunny-icon" />
             <div class="time">4 PM</div>
           </div>
           <div class="degree">77&deg;</div>
-        </div><div class="item">
+        </div>
+        <div class="item">
           <div class="container">
             <img src="/images/icon-sunny.webp" alt="sunny-icon" />
             <div class="time">4 PM</div>
           </div>
           <div class="degree">77&deg;</div>
-        </div><div class="item">
+        </div>
+        <div class="item">
           <div class="container">
             <img src="/images/icon-sunny.webp" alt="sunny-icon" />
             <div class="time">4 PM</div>
           </div>
           <div class="degree">77&deg;</div>
-        </div><div class="item">
+        </div>
+        <div class="item">
           <div class="container">
             <img src="/images/icon-sunny.webp" alt="sunny-icon" />
             <div class="time">4 PM</div>
           </div>
           <div class="degree">77&deg;</div>
-        </div><div class="item">
+        </div>
+        <div class="item">
+          <div class="container">
+            <img src="/images/icon-sunny.webp" alt="sunny-icon" />
+            <div class="time">4 PM</div>
+          </div>
+          <div class="degree">77&deg;</div>
+        </div>
+        <div class="item">
+          <div class="container">
+            <img src="/images/icon-sunny.webp" alt="sunny-icon" />
+            <div class="time">4 PM</div>
+          </div>
+          <div class="degree">77&deg;</div>
+        </div>
+        <div class="item">
+          <div class="container">
+            <img src="/images/icon-sunny.webp" alt="sunny-icon" />
+            <div class="time">4 PM</div>
+          </div>
+          <div class="degree">77&deg;</div>
+        </div>
+        <div class="item">
+          <div class="container">
+            <img src="/images/icon-sunny.webp" alt="sunny-icon" />
+            <div class="time">4 PM</div>
+          </div>
+          <div class="degree">77&deg;</div>
+        </div>
+        <div class="item">
+          <div class="container">
+            <img src="/images/icon-sunny.webp" alt="sunny-icon" />
+            <div class="time">4 PM</div>
+          </div>
+          <div class="degree">77&deg;</div>
+        </div>
+        <div class="item">
+          <div class="container">
+            <img src="/images/icon-sunny.webp" alt="sunny-icon" />
+            <div class="time">4 PM</div>
+          </div>
+          <div class="degree">77&deg;</div>
+        </div>
+        <div class="item">
+          <div class="container">
+            <img src="/images/icon-sunny.webp" alt="sunny-icon" />
+            <div class="time">4 PM</div>
+          </div>
+          <div class="degree">77&deg;</div>
+        </div>
+        <div class="item">
+          <div class="container">
+            <img src="/images/icon-sunny.webp" alt="sunny-icon" />
+            <div class="time">4 PM</div>
+          </div>
+          <div class="degree">77&deg;</div>
+        </div>
+        <div class="item">
+          <div class="container">
+            <img src="/images/icon-sunny.webp" alt="sunny-icon" />
+            <div class="time">4 PM</div>
+          </div>
+          <div class="degree">77&deg;</div>
+        </div>
+        <div class="item">
+          <div class="container">
+            <img src="/images/icon-sunny.webp" alt="sunny-icon" />
+            <div class="time">4 PM</div>
+          </div>
+          <div class="degree">77&deg;</div>
+        </div>
+        <div class="item">
           <div class="container">
             <img src="/images/icon-sunny.webp" alt="sunny-icon" />
             <div class="time">4 PM</div>

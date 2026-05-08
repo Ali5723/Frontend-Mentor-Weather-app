@@ -82,6 +82,31 @@ body {
   font-family: "DM Sans", Arial, sans-serif;
   padding: 1rem;
 }
+
+@media (min-width: 500px) {
+  body {
+    padding: 2rem;
+  }
+}
+@media (min-width: 700px) {
+  body {
+    padding-inline: 3rem;
+  }
+}
+@media (min-width: 950px) {
+  body {
+    padding-inline: 3.5rem;
+    display: grid;
+    grid-template-areas:
+      "header header header"
+      "title title title"
+      "search search search"
+      "weather weather hourly"
+      "status status hourly"
+      "daily daily hourly";
+    column-gap: 2rem;
+  }
+}
 /* End Body */
 
 /* Start All */
@@ -95,6 +120,21 @@ h3 {
 /* Start Components */
 .hidden {
   display: none;
+}
+
+.scroll {
+  overflow: auto;
+}
+.scroll::-webkit-scrollbar {
+  width: 5px;
+}
+.scroll::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.scroll::-webkit-scrollbar-thumb {
+  background-color: var(--Neutral-700);
+  border-radius: 8px;
+  border: 1px solid var(--Neutral-600);
 }
 
 /** Start Animations **/
@@ -180,6 +220,7 @@ h3 {
   align-items: center;
   margin-block-end: 4rem;
   /* padding: 1rem; */
+  grid-area: header;
 }
 .header > img {
   width: 10rem;
@@ -225,6 +266,7 @@ h1.page-title {
   padding-inline: 1rem;
   font-family: "Bricolage Grotesque", Arial, sans-serif;
   font-size: 48px;
+  grid-area: title;
 }
 /* End PageTitle */
 
@@ -239,6 +281,7 @@ h1.page-title {
   margin-inline: auto;
   width: -webkit-fill-available;
   margin-block-end: 1rem;
+  grid-area: search;
 }
 .search .dropdown .dropdown-title {
   position: relative;
@@ -277,6 +320,7 @@ h1.page-title {
   background-color: var(--Neutral-700);
 }
 .search .dropdown .dropdown-body {
+  max-height: 202px;
   width: -webkit-fill-available;
   top: calc(100% + 0.5rem);
   border-radius: 8px;
@@ -344,6 +388,11 @@ h1.page-title {
   gap: 1rem;
   padding: 2rem 0;
   margin-block: 1rem;
+  grid-area: weather;
+}
+.weather div:first-child {
+  flex-direction: column;
+  gap: 2rem;
 }
 .weather .city {
   font-weight: 600;
@@ -351,6 +400,7 @@ h1.page-title {
 .weather .date {
   font-weight: 300;
   color: var(--Neutral-200);
+  margin-block: 0;
 }
 .weather div {
   display: flex;
@@ -371,6 +421,8 @@ h1.page-title {
     border-radius: 20px;
     max-width: 450px;
     margin-inline: auto;
+    background-position: left;
+    width: -webkit-fill-available;
   }
 }
 @media (min-width: 700px) {
@@ -378,9 +430,26 @@ h1.page-title {
     max-width: 500px;
   }
 }
-@media (min-width: 755px) {
+@media (min-width: 750px) {
   .weather {
     max-width: 550px;
+  }
+}
+@media (min-width: 950px) {
+  .weather {
+    max-width: 100%;
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: space-around;
+    padding-inline: 2rem;
+  }
+  .weather div:first-child {
+    align-items: flex-start;
+  }
+}
+@media (min-width: 1100px) {
+  .weather {
+    padding-block: 3rem;
   }
 }
 /* End Weather */
@@ -391,6 +460,7 @@ h1.page-title {
   gap: 1rem;
   grid-template-columns: 1fr 1fr;
   margin-block-end: 2rem;
+  grid-area: status;
 }
 .status .status-item {
   border-radius: 8px;
@@ -411,9 +481,17 @@ h1.page-title {
   font-weight: 300;
   font-size: 32px;
 }
+@media (min-width: 950px) {
+  .status {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
 /* End Status */
 
 /* Start Daily */
+.daily {
+  grid-area: daily;
+}
 .daily > h2 {
   font-weight: 500;
   font-size: 20px;
@@ -454,6 +532,11 @@ h1.page-title {
   font-weight: 500;
   color: var(--Neutral-300);
 }
+@media (min-width: 950px) {
+  .daily .daily-items {
+    margin-block-end: 0;
+  }
+}
 /* End Daily */
 
 /* Start Hourly */
@@ -465,6 +548,7 @@ h1.page-title {
   flex-direction: column;
   gap: 1rem;
   position: relative;
+  grid-area: hourly;
 }
 .hourly .header-part {
   display: flex;
@@ -501,25 +585,8 @@ h1.page-title {
   flex-direction: column;
   gap: 1rem;
   max-height: 450px;
-  overflow: auto;
   padding: 0 1rem 1rem;
 }
-
-.hourly .main-part::-webkit-scrollbar {
-  width: 5px;
-}
-.hourly .main-part::-webkit-scrollbar-track {
-  background-color: transparent;
-}
-.hourly .main-part::-webkit-scrollbar-thumb {
-  background-color: var(--Neutral-700);
-  border-radius: 8px;
-  border: 1px solid var(--Neutral-600);
-}
-/* .hourly .main-part::-webkit-scrollbar-thumb:hover {
-  background: #555;
-} */
-
 .hourly .main-part .item {
   border: 1px solid var(--Neutral-600);
   background-color: var(--Neutral-700);
@@ -540,7 +607,30 @@ h1.page-title {
 .hourly .main-part .item .degree {
   margin-inline-end: 1rem;
 }
-/* End Hourly */
-
-@media (min-width: 800px) {
+@media (min-width: 950px) {
+  .hourly {
+    margin-block-start: 1rem;
+  }
+  .hourly .header-part {
+    gap: 1rem;
+  }
+  .hourly .main-part {
+    max-height: 1070px;
+  }
 }
+@media (min-width: 1032px) {
+  .hourly .main-part {
+    max-height: 1030px;
+  }
+}
+@media (min-width: 1100px) {
+  .hourly .main-part {
+    max-height: 1060px;
+  }
+}
+@media (min-width: 1115px) {
+  .hourly .main-part {
+    max-height: 830px;
+  }
+}
+/* End Hourly */
