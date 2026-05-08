@@ -19,6 +19,11 @@ const getTime12 = (time) => {
   return theResult;
 };
 
+const imgPrefix = () =>
+  location.href === "http://localhost:5173/"
+    ? "/images"
+    : "/Frontend-Mentor-Weather-app/images";
+
 /* Start DropDown */
 document.querySelectorAll(".dropdown").forEach((dropdown) => {
   dropdown
@@ -272,7 +277,7 @@ function changeHourly(index) {
     const theItemContainer = document.createElement("div");
     theItemContainer.classList.add("container");
     const theItemContainerImg = document.createElement("img");
-    theItemContainerImg.src = `/images/${getWeatherIcon(theData.code[i])}`;
+    theItemContainerImg.src = `${imgPrefix()}/${getWeatherIcon(theData.code[i])}`;
     theItemContainerImg.alt = getWeatherIcon(theData.code[i]);
     theItemContainer.append(theItemContainerImg);
     const theItemContainerTime = document.createElement("div");
@@ -375,7 +380,7 @@ document.querySelector("form.search").addEventListener("submit", (event) => {
         dailyItemTitle.append(theDay);
         dailyItem.append(dailyItemTitle);
         const dailyItemImage = document.createElement("img");
-        dailyItemImage.src = `/images/${getWeatherIcon(data.data.daily.weather_code[index])}`;
+        dailyItemImage.src = `${imgPrefix()}/${getWeatherIcon(data.data.daily.weather_code[index])}`;
         dailyItemImage.alt = getWeatherIcon(
           data.data.daily.weather_code[index],
         );
@@ -427,16 +432,16 @@ document.querySelector("form.search").addEventListener("submit", (event) => {
     })
     .then((data) => {
       // Temperature
-      const theTemperature = `${data.current.temperature_2m}${data.current_units.temperature_2m}`;
+      const theTemperature = `${data.current.temperature_2m}${data.current_units.temperature_2m[0]}`;
       document.getElementById("temperature").innerText = theTemperature;
-      document.querySelector(".degree").innerText = theTemperature.slice(0, -1);
+      document.querySelector(".degree").innerText = theTemperature;
 
       return data;
     })
     .then((data) => {
       // Image
       document.querySelector(".weather img").src =
-        `/images/${getWeatherIcon(data.current.weather_code)}`;
+        `${imgPrefix()}/${getWeatherIcon(data.current.weather_code)}`;
 
       return data;
     })
