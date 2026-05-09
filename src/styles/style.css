@@ -399,6 +399,14 @@ h1.page-title {
 }
 /* End Search */
 
+/* Start PageError */
+h2.page-error {
+  text-align: center;
+  margin-block-start: 100px;
+  display: none;
+}
+/* End PageError */
+
 /* Start Weather */
 .weather {
   background-image: url(/images/bg-today-small.svg);

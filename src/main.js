@@ -1,4 +1,5 @@
 const addAnimations = () => {
+  document.querySelector("h2.page-error").style.display = "none";
   document.querySelectorAll(".dropdown .dropdown-body").forEach((item) => {
     if (!item.className.includes("dropdownAnimation")) {
       item.classList.add("dropdownAnimation");
@@ -87,6 +88,27 @@ const unitsChange = (item) => {
     document.querySelector(".header .dropdown-item:first-child").innerText =
       "Switch to Imperial";
   }
+};
+
+const searchAction = (event) => {
+  // event.target.blur();
+  // document.getElementById("searchButton").click();
+  document.querySelector(".search .dropdown-body").className =
+    "dropdown-body scroll";
+  // addAnimations();
+  const dropdownProgress = document.createElement("div");
+  dropdownProgress.classList.add("dropdown-item", "progress");
+  dropdownProgress.append("Search in progress");
+  document
+    .querySelectorAll(".search .dropdown-item")
+    .forEach((removeItem) => removeItem.classList.add("visHidden"));
+  const dropdownBody = document.querySelector(".search .dropdown-body");
+  dropdownBody.classList.add("progress");
+  dropdownBody.prepend(dropdownProgress);
+  dropdownBody.scrollTo({
+    top: 5,
+    behavior: "smooth",
+  });
 };
 
 /* Start DropDown */
@@ -236,24 +258,7 @@ document
             "form.search .dropdown-body .selected-item",
           ).innerText;
 
-          document.getElementById("searchButton").click();
-          event.target.blur();
-          document.querySelector(".search .dropdown-body").className =
-            "dropdown-body scroll";
-          // addAnimations();
-          const dropdownProgress = document.createElement("div");
-          dropdownProgress.classList.add("dropdown-item", "progress");
-          dropdownProgress.append("Search in progress");
-          document
-            .querySelectorAll(".search .dropdown-item")
-            .forEach((removeItem) => removeItem.classList.add("visHidden"));
-          const dropdownBody = document.querySelector(".search .dropdown-body");
-          dropdownBody.classList.add("progress");
-          dropdownBody.prepend(dropdownProgress);
-          dropdownBody.scrollTo({
-            top: 5,
-            behavior: "smooth",
-          });
+          searchAction(event);
         }
         break;
 
@@ -298,6 +303,7 @@ document
       )
     ) {
       const searchInput = event.target.value;
+      searchAction();
       fetch(
         `https://geocoding-api.open-meteo.com/v1/search?name=${searchInput}`,
       )
@@ -305,6 +311,7 @@ document
         .then((data) => data.results)
         .then((data) => {
           if (data) {
+            document.querySelector("h2.page-error").style.display = "none";
             document
               .querySelectorAll("form.search .dropdown-item")
               .forEach((removeItem) => removeItem.remove());
@@ -327,6 +334,17 @@ document
                 document.getElementById("searchButton").click();
               });
 
+              const dropdownBody = document.querySelector(
+                ".search .dropdown-body",
+              );
+              dropdownBody.classList.remove("progress");
+              // dropdownBody.querySelector(".progress").remove();
+              dropdownBody
+                .querySelectorAll(".visHidden")
+                .forEach((removeItem) =>
+                  removeItem.classList.remove("visHidden"),
+                );
+
               document
                 .querySelector("form.search .dropdown-body")
                 .append(dropdownItem);
@@ -337,9 +355,15 @@ document
                 "form.search .dropdown-body .dropdown-item:first-child",
               )
               .classList.add("selected-item");
+          } else {
+            console.log(Error("No Search Results"));
+            document.querySelector("h2.page-error").style.display = "block";
           }
         })
-        .catch((err) => console.error(err));
+        .catch((err) => {
+          console.log(Error(err));
+          console.log(err);
+        });
     }
   });
 
