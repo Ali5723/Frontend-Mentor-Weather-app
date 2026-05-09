@@ -10,6 +10,10 @@ const parseHourly = () => JSON.parse(sessionStorage.getItem("hourly"));
 const stringifyHourly = (data) =>
   sessionStorage.setItem("hourly", JSON.stringify(data));
 
+const parseUnits = () => JSON.parse(localStorage.getItem("units"));
+const stringifyUnits = (data) =>
+  localStorage.setItem("units", JSON.stringify(data));
+
 const getTime12 = (time) => {
   const theTime = new Date(time);
   const theResult = theTime.toLocaleTimeString("en-US", {
@@ -23,6 +27,67 @@ const imgPrefix = () =>
   location.href === "http://localhost:5173/"
     ? "/images"
     : "/Frontend-Mentor-Weather-app/images";
+
+const switchChangeData = {
+  imperial: {
+    temperature: "fahrenheit",
+    wind: "mph",
+    precipitation: "inch",
+  },
+  metric: {
+    temperature: "celsius",
+    wind: "kmh",
+    precipitation: "mm",
+  },
+  all: {
+    temperature: ["fahrenheit", "celsius"],
+    wind: ["mph", "kmh"],
+    precipitation: ["inch", "mm"],
+  },
+};
+
+const unitsChange = (item) => {
+  if (item) {
+    if (!item.className.includes("selected-item")) {
+      let theResult = parseUnits();
+      if (switchChangeData.all.precipitation.includes(item.dataset.value)) {
+        theResult.precipitation = item.dataset.value;
+      } else if (
+        switchChangeData.all.temperature.includes(item.dataset.value)
+      ) {
+        theResult.temperature = item.dataset.value;
+      } else if (switchChangeData.all.wind.includes(item.dataset.value)) {
+        theResult.wind = item.dataset.value;
+      }
+      stringifyUnits(theResult);
+    }
+  }
+
+  document
+    .querySelectorAll(".header .dropdown-group .dropdown-item")
+    .forEach((dropdownItem) => {
+      dropdownItem.classList.remove("selected-item");
+      if (Object.values(parseUnits()).includes(dropdownItem.dataset.value)) {
+        dropdownItem.classList.add("selected-item");
+      }
+    });
+
+  if (
+    switchChangeData.imperial.precipitation === parseUnits().precipitation &&
+    switchChangeData.imperial.temperature === parseUnits().temperature &&
+    switchChangeData.imperial.wind === parseUnits().wind
+  ) {
+    document.querySelector(".header .dropdown-item:first-child").innerText =
+      "Switch to Metric";
+  } else if (
+    switchChangeData.metric.precipitation === parseUnits().precipitation &&
+    switchChangeData.metric.temperature === parseUnits().temperature &&
+    switchChangeData.metric.wind === parseUnits().wind
+  ) {
+    document.querySelector(".header .dropdown-item:first-child").innerText =
+      "Switch to Imperial";
+  }
+};
 
 /* Start DropDown */
 document.querySelectorAll(".dropdown").forEach((dropdown) => {
@@ -40,6 +105,49 @@ document.querySelectorAll(".dropdown").forEach((dropdown) => {
     });
 });
 /* End DropDown */
+
+/* Start Units */
+if (!parseUnits()) {
+  let theRequest = {
+    temperature: "",
+    wind: "",
+    precipitation: "",
+  };
+  document
+    .querySelectorAll(".header .selected-item")
+    .forEach((reqItem, index) => {
+      index === 0
+        ? (theRequest.temperature = reqItem.dataset.value)
+        : index === 1
+          ? (theRequest.wind = reqItem.dataset.value)
+          : index === 2
+            ? (theRequest.precipitation = reqItem.dataset.value)
+            : "";
+    });
+  stringifyUnits(theRequest);
+}
+
+window.addEventListener("DOMContentLoaded", (event) => unitsChange());
+
+document
+  .querySelector(".header .dropdown-body")
+  .addEventListener("click", (dropdown) => {
+    if (dropdown.target.className.includes("item")) {
+      if (!dropdown.target.parentElement.className.includes("group")) {
+        if (dropdown.target.innerText.includes("Imperial")) {
+          stringifyUnits(switchChangeData.imperial);
+          dropdown.target.innerText = "Switch to Metric";
+        } else if (dropdown.target.innerText.includes("Metric")) {
+          stringifyUnits(switchChangeData.metric);
+          dropdown.target.innerText = "Switch to Imperial";
+        }
+        unitsChange();
+      } else {
+        unitsChange(dropdown.target);
+      }
+    }
+  });
+/* End Units */
 
 /* Start Search */
 document.getElementById("searchIcon").addEventListener("click", (event) => {
@@ -120,12 +228,33 @@ document
         break;
 
       case "Enter":
-        event.target.value = document.querySelector(
-          "form.search .dropdown-body .selected-item",
-        ).innerText;
-        document.getElementById("searchButton").click();
-        event.target.blur();
-        addAnimations();
+        if (
+          document.querySelector("form.search .dropdown-body .selected-item")
+            .innerText !== "City Name"
+        ) {
+          event.target.value = document.querySelector(
+            "form.search .dropdown-body .selected-item",
+          ).innerText;
+
+          document.getElementById("searchButton").click();
+          event.target.blur();
+          document.querySelector(".search .dropdown-body").className =
+            "dropdown-body scroll";
+          // addAnimations();
+          const dropdownProgress = document.createElement("div");
+          dropdownProgress.classList.add("dropdown-item", "progress");
+          dropdownProgress.append("Search in progress");
+          document
+            .querySelectorAll(".search .dropdown-item")
+            .forEach((removeItem) => removeItem.classList.add("visHidden"));
+          const dropdownBody = document.querySelector(".search .dropdown-body");
+          dropdownBody.classList.add("progress");
+          dropdownBody.prepend(dropdownProgress);
+          dropdownBody.scrollTo({
+            top: 5,
+            behavior: "smooth",
+          });
+        }
         break;
 
       default:
@@ -306,6 +435,14 @@ document.querySelector("form.search").addEventListener("submit", (event) => {
           ? item
           : theItem;
     });
+  if (theItem === undefined) {
+    theItem = document.querySelector(
+      "form.search .dropdown-body .dropdown-item:first-child",
+    );
+  }
+
+  event.target.querySelector("input").value =
+    theItem.innerText === "City Name" ? "" : theItem.innerText;
 
   const daysOfWeek = [
     "Sunday",
@@ -331,8 +468,9 @@ document.querySelector("form.search").addEventListener("submit", (event) => {
     "Dec",
   ];
 
+  const theRequest = parseUnits();
   fetch(
-    `https://api.open-meteo.com/v1/forecast?latitude=${theItem.dataset.latitude}&longitude=${theItem.dataset.longitude}&current=temperature_2m,wind_speed_10m,weather_code,relative_humidity_2m,precipitation&hourly=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min&forecast_days=7&timezone=auto`,
+    `https://api.open-meteo.com/v1/forecast?latitude=${theItem.dataset.latitude}&longitude=${theItem.dataset.longitude}&current=temperature_2m,wind_speed_10m,weather_code,relative_humidity_2m,precipitation&hourly=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min&forecast_days=7&timezone=auto&temperature_unit=${theRequest.temperature}&wind_speed_unit=${theRequest.wind}&precipitation_unit=${theRequest.precipitation}`,
   )
     .then((res) => res.json())
     .then((data) => {
@@ -448,8 +586,26 @@ document.querySelector("form.search").addEventListener("submit", (event) => {
     .then((data) => {
       // Hourly
       stringifyHourly(data.hourly);
-
       changeHourly();
+
+      // Remove VisHidden
+      addAnimations();
+
+      document
+        .querySelectorAll(".visHidden")
+        .forEach((removeItem) => removeItem.classList.remove("visHidden"));
+      document
+        .querySelectorAll(".search .progress")
+        .forEach((removeItem, index) => {
+          if (index === 1) {
+            removeItem.remove();
+          } else {
+            removeItem.classList.remove("progress");
+          }
+        });
+
+      console.log(data);
     });
 });
+
 /* End Logic */

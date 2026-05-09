@@ -122,6 +122,10 @@ h3 {
   display: none;
 }
 
+.visHidden {
+  opacity: 0;
+}
+
 .scroll {
   overflow: auto;
 }
@@ -325,6 +329,10 @@ h1.page-title {
   top: calc(100% + 0.5rem);
   border-radius: 8px;
 }
+.search .dropdown .dropdown-body.progress {
+  overflow: hidden;
+  height: 30px;
+}
 .search .dropdown .dropdown-item {
   border-radius: 8px;
   padding: 0.75rem 0.5rem;
@@ -337,6 +345,20 @@ h1.page-title {
 .search .dropdown .dropdown-item.selected-item {
   background-color: var(--Neutral-700);
   border-color: var(--Neutral-600);
+}
+.search .dropdown .dropdown-item.progress {
+  display: flex;
+  gap: 1rem;
+  pointer-events: none;
+}
+/* @keyframes loading {
+  to {
+    transform: rotate(360deg);
+  }
+} */
+.search .dropdown .dropdown-item.progress::before {
+  content: url(/images/icon-loading.svg);
+  /* animation: loading 1s 100ms infinite; */
 }
 .search button {
   border: 0;
@@ -389,6 +411,7 @@ h1.page-title {
   padding: 2rem 0;
   margin-block: 1rem;
   grid-area: weather;
+  transition: var(--hoverTransition);
 }
 .weather div:first-child {
   flex-direction: column;
@@ -461,6 +484,7 @@ h1.page-title {
   grid-template-columns: 1fr 1fr;
   margin-block-end: 2rem;
   grid-area: status;
+  transition: var(--hoverTransition);
 }
 .status .status-item {
   border-radius: 8px;
@@ -491,6 +515,7 @@ h1.page-title {
 /* Start Daily */
 .daily {
   grid-area: daily;
+  transition: var(--hoverTransition);
 }
 .daily > h2 {
   font-weight: 500;
@@ -549,6 +574,7 @@ h1.page-title {
   gap: 1rem;
   position: relative;
   grid-area: hourly;
+  transition: var(--hoverTransition);
 }
 .hourly .header-part {
   display: flex;

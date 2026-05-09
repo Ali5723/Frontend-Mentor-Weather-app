@@ -1,17 +1,13 @@
-body is container => paddings
-
-body responsive
-
 variations in portfolio sass and tailwind
 
 after click the search button with time it blur
 
-click on the search item to use as enter
-
-city name no click
-
 search state
 
-search button
++click on the search item to use as enter
 
-units and save
++city name no click
+
++search button => if click then search for output and choose the first if found nothing then error 
+
++units and save
